@@ -24,7 +24,9 @@ body {
     rgb(var(--background-start-rgb));
 }
 
-a {
-  color: rgb(var(--foreground-rgb));
-  text-decoration: none;
+@layer base {
+  a {
+    color: rgb(var(--foreground-rgb));
+    text-decoration: none;
+  }
 }
