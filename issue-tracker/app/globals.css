@@ -25,6 +25,10 @@ body,
     rgb(var(--background-start-rgb));
 }
 
+.radix-themes {
+  --default-font-family: var(--font-inter);
+}
+
 @layer base {
   a {
     color: rgb(var(--foreground-rgb));
