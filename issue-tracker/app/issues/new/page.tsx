@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { issueSchema } from "@/app/validationSchemas";
 import { zodResolver } from "@hookform/resolvers/zod";
+import ErrorMessage from "@/app/components/ErrorMessage";
 import { z } from "zod";
 
 type IssueForm = z.infer<typeof issueSchema>;
@@ -49,11 +50,7 @@ const NewIssuePage = () => {
         onSubmit={handleSubmit(onSubmit)}
       >
         <TextField.Root placeholder="Title" {...register("title")} />
-        {errors.title && (
-          <Text color="red" as="p">
-            Title is required
-          </Text>
-        )}
+        <ErrorMessage>{errors.title?.message}</ErrorMessage>
 
         <Controller
           name="description"
@@ -62,11 +59,7 @@ const NewIssuePage = () => {
             <SimpleMdeReact placeholder="Description of the issue" {...field} />
           )}
         />
-        {errors.description && (
-          <Text color="red" as="p">
-            Description is required
-          </Text>
-        )}
+        <ErrorMessage>{errors.description?.message}</ErrorMessage>
 
         <Button>Submit New Issue</Button>
       </form>
