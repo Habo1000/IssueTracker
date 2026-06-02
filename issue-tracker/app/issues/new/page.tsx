@@ -1,15 +1,16 @@
 "use client";
 
-import { TextField, Button, Callout, Text } from "@radix-ui/themes";
-import { SimpleMdeReact } from "react-simplemde-editor";
-import "easymde/dist/easymde.min.css";
-import { useForm, Controller, SubmitHandler } from "react-hook-form";
-import axios from "axios";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
+import ErrorMessage from "@/app/components/ErrorMessage";
+import Spinner from "@/app/components/Spinner";
 import { issueSchema } from "@/app/validationSchemas";
 import { zodResolver } from "@hookform/resolvers/zod";
-import ErrorMessage from "@/app/components/ErrorMessage";
+import { Button, Callout, TextField } from "@radix-ui/themes";
+import axios from "axios";
+import "easymde/dist/easymde.min.css";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { Controller, SubmitHandler, useForm } from "react-hook-form";
+import { SimpleMdeReact } from "react-simplemde-editor";
 import { z } from "zod";
 
 type IssueForm = z.infer<typeof issueSchema>;
@@ -19,7 +20,7 @@ const NewIssuePage = () => {
     register,
     control,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm<IssueForm>({
     resolver: zodResolver(issueSchema),
   });
@@ -61,7 +62,9 @@ const NewIssuePage = () => {
         />
         <ErrorMessage>{errors.description?.message}</ErrorMessage>
 
-        <Button>Submit New Issue</Button>
+        <Button disabled={isSubmitting}>
+          Submit New Issue {isSubmitting && <Spinner />}
+        </Button>
       </form>
     </div>
   );
