@@ -9,12 +9,11 @@ import IssueActions from "./IssueActions";
 
 const Issues = async () => {
   const issues = await prisma.issue.findMany();
-  await delay(2000);
 
   return (
     <div className="flex flex-col justify-center items-center my-4 gap-4 px-4">
       <IssueActions />
-      <div className=" w-full max-w-2xl">
+      <div className="w-full max-w-2xl">
         <Table.Root variant="surface">
           <Table.Header>
             <Table.Row>
@@ -31,7 +30,12 @@ const Issues = async () => {
             {issues.map((issue) => (
               <Table.Row key={issue.id}>
                 <Table.RowHeaderCell>
-                  {issue.title}
+                  <Link
+                    href={`/issues/${issue.id}`}
+                    className="text-inherit hover:text-orange-500"
+                  >
+                    {issue.title}
+                  </Link>
                   <div className="block md:hidden">
                     <StatusBadge status={issue.status} />
                   </div>
