@@ -1,6 +1,6 @@
 import React from "react";
 import { Button, Text } from "@radix-ui/themes";
-import Link from "next/link";
+import Link from "../components/Link";
 import { prisma } from "@/prisma/client";
 import { Table } from "@radix-ui/themes";
 import StatusBadge from "../components/StatusBadge";
@@ -30,12 +30,7 @@ const Issues = async () => {
             {issues.map((issue) => (
               <Table.Row key={issue.id}>
                 <Table.RowHeaderCell>
-                  <Link
-                    href={`/issues/${issue.id}`}
-                    className="text-inherit hover:text-orange-500"
-                  >
-                    {issue.title}
-                  </Link>
+                  <Link href={`/issues/${issue.id}`}>{issue.title}</Link>
                   <div className="block md:hidden">
                     <StatusBadge status={issue.status} />
                   </div>
