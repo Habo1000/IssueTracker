@@ -4,7 +4,7 @@ import { Card, Flex, Heading, Text } from "@radix-ui/themes";
 import { notFound } from "next/navigation";
 import Markdown from "react-markdown";
 
-import React from "react";
+import delay from "delay";
 
 interface Props {
   params: Promise<{ id: string }>;
