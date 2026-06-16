@@ -8,6 +8,7 @@ const adapter = new PrismaMariaDb({
   user: "root",
   password: process.env.DB_PASSWORD,
   database: "issue-tracker",
+  allowPublicKeyRetrieval: true,
 });
 
 const prismaSingleton = () =>

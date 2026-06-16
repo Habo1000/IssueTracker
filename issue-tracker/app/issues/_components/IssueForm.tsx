@@ -1,6 +1,6 @@
 "use client";
 
-import { ErrorMessage, Spinner } from "@/app/components";
+import { ErrorMessage, Spinner } from "@/app/_components";
 import { issueSchema } from "@/app/validationSchemas";
 import { Issue } from "@/prisma/generated/prisma";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -38,6 +38,7 @@ const IssueForm = ({ issue }: { issue?: Issue }) => {
       if (issue) await axios.patch("/api/issues/" + issue.id, data);
       else await axios.post("/api/issues", data);
       router.push("/issues");
+      router.refresh();
       setError("");
     } catch (error) {
       setError("An unexpected error occured.");

@@ -1,7 +1,7 @@
 import { Issue } from "@/prisma/generated/prisma";
 import { Card, Flex, Heading, Text } from "@radix-ui/themes";
 import Markdown from "react-markdown";
-import { StatusBadge } from "../components";
+import { StatusBadge } from "../_components";
 
 const IssueDetail = ({ issue }: { issue: Issue }) => {
   const { title, description, status, createdAt } = issue;

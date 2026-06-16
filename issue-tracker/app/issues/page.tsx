@@ -1,6 +1,6 @@
 import { prisma } from "@/prisma/client";
 import { Table } from "@radix-ui/themes";
-import { Link, StatusBadge } from "../components";
+import { Link, StatusBadge } from "../_components";
 import IssueActions from "./IssueActions";
 
 const Issues = async () => {
@@ -45,5 +45,7 @@ const Issues = async () => {
     </div>
   );
 };
+
+export const dynamic = "force-dynamic";
 
 export default Issues;
