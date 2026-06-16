@@ -1,6 +1,4 @@
-import StatusBadge from "@/app/_components/StatusBadge";
 import { Card, Flex, Heading, Text } from "@radix-ui/themes";
-import Markdown from "react-markdown";
 import { Skeleton } from "@radix-ui/themes";
 
 const DetailLoading = () => {

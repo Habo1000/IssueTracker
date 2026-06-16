@@ -1,7 +1,7 @@
-import React from "react";
-import IssueForm from "../../_components/IssueForm";
 import { prisma } from "@/prisma/client";
 import { notFound } from "next/navigation";
+
+import { IssueFormWrapper } from "../../Wrapper";
 
 interface Props {
   params: Promise<{ id: string }>;
@@ -26,7 +26,7 @@ const EditIssuePage = async ({ params }: Props) => {
 
   return (
     <>
-      <IssueForm issue={issue} />
+      <IssueFormWrapper issue={issue} />
     </>
   );
 };
