@@ -10,11 +10,9 @@ interface Props {
 
 const Link = ({ href, children }: Props) => {
   return (
-    <NextLink href={href}>
-      <RadixLink asChild>
-        <a>{children}</a>
-      </RadixLink>
-    </NextLink>
+    <RadixLink asChild>
+      <NextLink href={href}>{children}</NextLink>
+    </RadixLink>
   );
 };
 
