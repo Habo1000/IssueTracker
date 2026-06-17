@@ -8,11 +8,13 @@ export async function PATCH(
 ) {
   const { id } = await params;
 
-  const body = await request.json();
+  const issueId = parseInt(id);
 
-  if (typeof parseInt(id) != "number") {
+  if (Number.isNaN(issueId)) {
     return NextResponse.json({ error: "Bad id" }, { status: 400 });
   }
+
+  const body = await request.json();
 
   const validation = issueSchema.safeParse(body);
 
@@ -25,7 +27,7 @@ export async function PATCH(
 
   const issue = await prisma.issue.findUnique({
     where: {
-      id: parseInt(id),
+      id: issueId,
     },
   });
 
@@ -40,7 +42,7 @@ export async function PATCH(
 
   const updatedIssue = await prisma.issue.update({
     where: {
-      id: parseInt(id),
+      id: issueId,
     },
     data: {
       title: body.title,
@@ -51,4 +53,35 @@ export async function PATCH(
   return NextResponse.json(updatedIssue, {
     status: 200,
   });
+}
+
+export async function DELETE(
+  request: NextRequest,
+  { params }: { params: Promise<{ id: string }> },
+) {
+  const { id } = await params;
+
+  const issueId = parseInt(id);
+
+  if (Number.isNaN(issueId)) {
+    return NextResponse.json({ error: "Bad id" }, { status: 400 });
+  }
+
+  const issue = await prisma.issue.findUnique({
+    where: {
+      id: issueId,
+    },
+  });
+
+  if (!issue) {
+    return NextResponse.json({ error: "No issue found" }, { status: 404 });
+  }
+
+  const deletedIssue = await prisma.issue.delete({
+    where: {
+      id: issueId,
+    },
+  });
+
+  return NextResponse.json(deletedIssue, { status: 200 });
 }
